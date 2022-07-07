@@ -4,7 +4,7 @@ import { SwitchPageContext } from './../../context/SwitchPageContext'
 
 const Navbar = () => {
   
-  const { count, addCounter } = useContext(SwitchPageContext)
+  const { addCounter } = useContext(SwitchPageContext)
   
   return (
       <nav className="bg-slate-100">
