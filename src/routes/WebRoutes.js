@@ -8,11 +8,11 @@ import Contact from './../pages/Contact';
 const WebRoutes = () => {
   return (
     <SwitchPageProvider>
-      <Router>
+      <Router basename={`/${process.env.PUBLIC_URL}`}>
         <Routes>
-          <Route path={`/${process.env.PUBLIC_URL}`} element={<Home />} />
-          <Route path={`/${process.env.PUBLIC_URL}/about`} element={<About />} />
-          <Route path={`/${process.env.PUBLIC_URL}/contact`} element={<Contact />} />
+          <Route path="/" element={<Home />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/contact" element={<Contact />} />
         </Routes>
       </Router>
     </SwitchPageProvider>
