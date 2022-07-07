@@ -1,4 +1,4 @@
-import { Component, useRef, useState, useEffect, createContext } from 'react';
+import { useRef, useState, useEffect, createContext } from 'react';
 
 const SwitchPageContext = createContext()
 
