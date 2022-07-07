@@ -10,7 +10,7 @@ const Navbar = () => {
       <nav className="bg-slate-100">
         <div className="flex w-full h-10 items-center">
           <div className="w-2/5 text-center">
-            <h1 className="text-red-500 text-lg font-medium">Learn-React</h1>
+            <h1 className="text-red-500 text-lg font-medium">Learn React</h1>
           </div>
           <div className="w-3/5">
             <div className="flex justify-center text-sm md:text-md gap-2 md:gap-4">
