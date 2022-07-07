@@ -1,7 +1,7 @@
 import Header from './../components/Header'
 import { SwitchPageContext } from './../context/SwitchPageContext'
 
-const AppTemplate = ({children}) => {
+const AppLayout = ({children}) => {
   return (
     <>
       <Header />
@@ -26,4 +26,4 @@ const AppTemplate = ({children}) => {
   )
 }
 
-export default AppTemplate;
+export default AppLayout;
