@@ -2,7 +2,6 @@
   "name": "learn-react",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://nsmle.github.io/learn-react",
   "dependencies": {
     "@headlessui/react": "^1.6.5",
     "@testing-library/jest-dom": "^5.16.4",
