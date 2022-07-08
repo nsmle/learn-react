@@ -4,6 +4,8 @@ import { SwitchPageProvider } from './../context/SwitchPageContext'
 import Home from './../pages/Home';
 import About from './../pages/About';
 import Contact from './../pages/Contact';
+import Login from './../pages/Auth/Login';
+import Register from './../pages/Auth/Register';
 
 const WebRoutes = () => {
   return (
@@ -13,6 +15,8 @@ const WebRoutes = () => {
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
         </Routes>
       </Router>
     </SwitchPageProvider>

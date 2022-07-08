@@ -1,13 +1,13 @@
-import AppLayout from './../layouts/AppLayout'
+import AppLayout from './../../layouts/AppLayout'
 
-const About = () => {
+const Login = () => {
   return (
     <AppLayout>
       <h1 className="mt-12 text-center text-3xl text-teal-500 font-bold underline">
-        About Us
+        Login Page
       </h1>
     </AppLayout>
   )
 }
 
-export default About;
+export default Login;
