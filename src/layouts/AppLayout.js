@@ -1,36 +1,39 @@
 import Header from './../components/Header'
-import { SwitchPageContext } from './../context/SwitchPageContext'
+import Footer from './../components/Footer'
+import { ButtonPrimaryOutline } from './../components/Buttons'
+import { useSwitchPageContext } from './../context/SwitchPageContext'
+
 
 const AppLayout = ({children}) => {
+  const switchPage = useSwitchPageContext()
+  
   return (
     <>
       <Header />
       
       <main>
-        {children}
-        <SwitchPageContext.Consumer>
-          {({count, handleResetCounter}) => {
-            return (count > 0 ) &&
-            (<div className="mt-8">
-              <p className={ (count > 10 && " animate-bounce" ) + " text-center text-pink-400" }>
-                You have switched pages <span className="text-red-500 font-bold">{count}</span> times
-              </p>
-              {
-                ( count > 10 &&
-                  <div className="flex justify-center ">
-                    <button onClick={handleResetCounter} className="mt-2 px-2 py-1 bg-red-400 text-lg text-white font-semibold rounded active:scale-95 active:bg-red-400/90">
-                      Reset
-                    </button>
-                  </div>)
-              }
+        <div className="flex pt-2 md:pt-12 justify-center">
+          {children}
+        </div>
+        
+        <div className="w-full mt-8">
+          { switchPage.count > 0 &&
+            (<p className={ (switchPage.count > 10 && " animate-bounce" ) + " text-center text-teal-400" }>
+              You have switched pages <span className="text-teal-500 font-bold">{switchPage.count}</span> times
+            </p>)
+          }
+          
+          { switchPage.count > 10 &&
+            (<div className="flex justify-center">
+                <ButtonPrimaryOutline onClick={switchPage.handleResetCounter}>
+                  Reset
+                </ButtonPrimaryOutline>
             </div>)
-          }}
-        </SwitchPageContext.Consumer>
+          }
+        </div>
       </main>
       
-      <footer className="text-center">
-        <p className="text-slate-100" >footer</p>
-      </footer>
+      <Footer />
     </>
   )
 }

@@ -1,8 +1,8 @@
-import { useRef, useState, useEffect, createContext } from 'react';
+import { useRef, useState, useEffect, createContext, useContext } from 'react';
 
-const SwitchPageContext = createContext()
+export const SwitchPageContext = createContext()
 
-const SwitchPageProvider = ({children}) => {
+export const SwitchPageProvider = ({children}) => {
   const isInitialMount = useRef(true);
   const [count, setCount] = useState(0)
   
@@ -26,14 +26,19 @@ const SwitchPageProvider = ({children}) => {
     localStorage.removeItem("switch-page-count");
   }
   
+  const SwitchPageContextValue = {
+    count,
+    handleAddCounter,
+    handleResetCounter
+  }
+  
   return (
-    <SwitchPageContext.Provider value={{ count, handleAddCounter, handleResetCounter }}>
+    <SwitchPageContext.Provider value={SwitchPageContextValue}>
       {children}
     </SwitchPageContext.Provider>
   )
 }
 
-export {
-  SwitchPageContext,
-  SwitchPageProvider
+export const useSwitchPageContext = () => {
+  return useContext(SwitchPageContext)
 }

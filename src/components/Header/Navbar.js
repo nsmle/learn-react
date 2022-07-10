@@ -1,12 +1,11 @@
-import React, { useState, useContext } from 'react'
-import { SwitchPageContext } from './../../context/SwitchPageContext'
+import React, { useState } from 'react'
+import { useSwitchPageContext } from './../../context/SwitchPageContext'
 import { Link, useLocation } from 'react-router-dom'
-import ButtonPrimary from './../Buttons/ButtonPrimary'
-import ButtonPrimaryOutline from './../Buttons/ButtonPrimaryOutline'
 import Navlink from './Navlink'
+import { ButtonPrimary, ButtonPrimaryOutline } from './../Buttons/'
 
 const Navbar = () => {
-  const { handleAddCounter } = useContext(SwitchPageContext)
+  const { handleAddCounter } = useSwitchPageContext()
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const location = useLocation()
   
