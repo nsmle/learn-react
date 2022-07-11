@@ -1,14 +1,17 @@
 import Input from './Input'
+import { useFormContext } from 'react-hook-form'
 
-const FormInput = ({id, name, type, label, placeholder, error, onChange, onClick, required}) => {
+const FormInput = ({name, type, label, placeholder, required}) => {
+  const { formState: { errors } } = useFormContext()
+  
   return (
     <div className="mb-4">
-      <label className="block text-slate-500 text-sm font-bold mb-2" htmlFor={id}>
+      <label className="block text-slate-500 text-sm font-bold mb-2" htmlFor={name}>
         {label}
         { required && (<span className="mx-1 text-red-500">*</span>) }
       </label>
-      <Input id={id} name={name} type={type} placeholder={placeholder} error={error} onChange={onChange} onClick={onClick}/>
-      <p className="mt-2 text-red-500 text-xs italic">{error?.message}</p>
+      <Input name={name} type={type} placeholder={placeholder}/>
+      <p className="mt-2 text-red-500 text-xs italic">{errors?.[name]?.message}</p>
     </div>
   )
 }
