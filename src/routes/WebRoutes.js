@@ -5,6 +5,7 @@ import About from './../pages/About';
 import Contact from './../pages/Contact';
 import Login from './../pages/Auth/Login';
 import Register from './../pages/Auth/Register';
+import Profile from './../pages/User/Profile';
 
 const WebRoutes = () => {
   return (
@@ -15,6 +16,7 @@ const WebRoutes = () => {
         <Route path="/contact" element={<Contact />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/profile" element={<Profile/>} />
       </Routes>
     </Router>
   );

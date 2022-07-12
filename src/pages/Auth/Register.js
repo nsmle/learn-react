@@ -7,6 +7,7 @@ import AppLayout from './../../layouts/AppLayout'
 import { ButtonPrimary } from './../../components/Buttons'
 import * as yup from "yup";
 import FormInput from './../../components/Form/FormInput'
+import { withGuest, useAuthContext } from './../../context/AuthContext'
 
 const registerSchema = yup.object({
   name : yup.string().min(1).matches(/^[aA-zZ\s]+$/).required(),
@@ -15,13 +16,15 @@ const registerSchema = yup.object({
   passwordConfirmation : yup.string().oneOf([yup.ref('password'), null]).required('konfirmasi kata sandi wajib di isi'),
 }).required();
 
-export default function Register() {
+const Register = () => {
+  const AuthContext = useAuthContext()
   const methods = useForm({
     resolver: yupResolver(registerSchema)
   });
   
-  const onSubmit = () => {
+  const onSubmit = (user) => {
     toast.success('Register successful.');
+    AuthContext.setUser(user)
   };
   
   return (
@@ -56,3 +59,5 @@ export default function Register() {
     </AppLayout>
   )
 }
+
+export default withGuest(Register)

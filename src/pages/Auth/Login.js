@@ -7,19 +7,22 @@ import AppLayout from './../../layouts/AppLayout'
 import { ButtonPrimary } from './../../components/Buttons'
 import * as yup from "yup";
 import FormInput from './../../components/Form/FormInput'
+import { withGuest, useAuthContext } from './../../context/AuthContext'
 
 const loginSchema = yup.object({
   email: yup.string().email().max(255).required(),
   password: yup.string().min(8).required(),
 }).required();
 
-export default function Login() {
+const Login = () => {
+  const AuthContext = useAuthContext()
   const methods = useForm({
     resolver: yupResolver(loginSchema)
   });
   
-  const onSubmit = () => {
+  const onSubmit = (user) => {
     toast.success('Login successful.');
+    AuthContext.setUser(user)
   };
   
   return (
@@ -52,3 +55,5 @@ export default function Login() {
     </AppLayout>
   )
 }
+
+export default withGuest(Login);
