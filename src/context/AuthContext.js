@@ -17,6 +17,13 @@ export const AuthProvider = ({ children }) => {
     setUser: (user) => {
       localStorage.setItem('authenticated-user', JSON.stringify(user))
       setUser(user)
+    },
+    isUserEmpty: () => {
+      return (Object.keys(user).length === 0)
+    },
+    logout: () => {
+      localStorage.removeItem('authenticated-user')
+      setUser({})
     }
   }
   
@@ -34,7 +41,7 @@ export const useAuthContext = () => {
 
 export const withAuth = (WrappedComponent, role) => ({...props}) => {
   const auth = useContext(AuthContext)
-  if (Object.keys(auth.user).length === 0) return <Navigate to="/login" />
+  if (auth.isUserEmpty()) return <Navigate to="/login" />
   
   return (
     <>
@@ -45,7 +52,7 @@ export const withAuth = (WrappedComponent, role) => ({...props}) => {
 
 export const withGuest = (WrappedComponent, role) => ({...props}) => {
   const auth = useContext(AuthContext)
-  if (Object.keys(auth.user).length > 0) return <Navigate to="/profile" />
+  if (!auth.isUserEmpty()) return <Navigate to="/profile" />
   
   return (
     <>

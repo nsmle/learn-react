@@ -1,13 +1,16 @@
 import React, { useState } from 'react'
 import { useSwitchPageContext } from './../../context/SwitchPageContext'
+import { useAuthContext } from './../../context/AuthContext'
 import { Link, useLocation } from 'react-router-dom'
 import Navlink from './Navlink'
-import { ButtonPrimary, ButtonPrimaryOutline } from './../Buttons/'
+import Navprofile from './Navprofile'
+import { ButtonPrimary, ButtonPrimaryOutline, ButtonDangerOutline } from './../Buttons/'
 
 const Navbar = () => {
   const { handleAddCounter } = useSwitchPageContext()
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const location = useLocation()
+  const AuthContext = useAuthContext()
   
   const handleIsMobileMenuChange = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen)
@@ -32,17 +35,33 @@ const Navbar = () => {
           <Navlink/>
         </div>
         <div className={ (!isMobileMenuOpen && 'hidden') + " flex md:block w-full md:w-auto pt-2 md:pt-0 justify-end md:order-3"}>
-          { location.pathname !== '/login' &&
+          { /*location.pathname !== '/login' &&
             (<Link onClick={handleAddCounter} className="mx-1" to="/login">
               <ButtonPrimaryOutline>Login</ButtonPrimaryOutline>
-             </Link>)
+             </Link>)*/
           }
-          { location.pathname !== '/register' &&
+          { /*location.pathname !== '/register' &&
             (<Link onClick={handleAddCounter} className="mx-1" to="/register">
               <ButtonPrimary>Register</ButtonPrimary>
-             </Link>)
+             </Link>)*/
+          }
+          { !AuthContext.isUserEmpty() ?
+              (<Navprofile />) :
+              (<div>
+                  { location.pathname !== '/login' &&
+                    (<Link onClick={handleAddCounter} className="mx-1" to="/login">
+                      <ButtonPrimaryOutline>Login</ButtonPrimaryOutline>
+                     </Link>)
+                  }
+                  { location.pathname !== '/register' &&
+                    (<Link onClick={handleAddCounter} className="mx-1" to="/register">
+                      <ButtonPrimary>Register</ButtonPrimary>
+                     </Link>)
+                  }
+               </div>)
           }
         </div>
+        
       </div>
     </nav>
   )
