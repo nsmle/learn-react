@@ -4,7 +4,7 @@ import { useAuthContext } from './../../context/AuthContext'
 import { Link, useLocation } from 'react-router-dom'
 import Navlink from './Navlink'
 import Navprofile from './Navprofile'
-import { ButtonPrimary, ButtonPrimaryOutline, ButtonDangerOutline } from './../Buttons/'
+import { ButtonPrimary, ButtonPrimaryOutline } from './../Buttons/'
 
 const Navbar = () => {
   const { handleAddCounter } = useSwitchPageContext()
