@@ -28,7 +28,7 @@ const Login = () => {
   return (
     <AppLayout>
       <ToastContainer />
-      <div className="container mx-4 mt-2">
+      <div className="mx-4 mt-2">
         <div className="bg-slate-100 border border-slate-200/50 shadow-md shadow-blue-50 rounded px-8 pt-6 pb-8 mb-4 flex flex-col">
           <h1 className="text-teal-500 text-center font-bold text-3xl mt-2 mb-6">Login</h1>
           <FormProvider {...methods}>

@@ -6,7 +6,6 @@ import { useAuthContext } from './../../context/AuthContext'
 const Navprofile = () => {
   const [isOpenUserMenu, setIsOpenUserMenu] = useState(false)
   const { user, logout } = useAuthContext()
-  console.log(logout)
   
   return (
     <div className="relative border-t border-gray-300 md:border-none w-full md:w-auto">

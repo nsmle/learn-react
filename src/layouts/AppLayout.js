@@ -13,7 +13,9 @@ const AppLayout = ({children}) => {
       
       <main>
         <div className="flex pt-2 md:pt-12 justify-center">
-          {children}
+          <div className="container">
+            {children}
+          </div>
         </div>
         
         <div className="w-full mt-8">
