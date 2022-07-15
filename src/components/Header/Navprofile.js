@@ -11,12 +11,12 @@ const Navprofile = () => {
     <div className="relative border-t border-gray-300 md:border-none w-full md:w-auto">
       <button onClick={() => setIsOpenUserMenu(!isOpenUserMenu)} className="hidden md:flex mr-3 text-sm bg-gray-400 rounded-full md:mr-0 focus:ring-4 focus:ring-gray-300">
         <span className="sr-only">Open user menu</span>
-        <image className="w-8 h-8 rounded-full" src="https://xsgames.co/randomusers/avatar.php?g=male" alt="user photo" />
+        <img className="w-8 h-8 rounded-full" src="https://xsgames.co/randomusers/avatar.php?g=male" alt={(user?.name) + ' Profile'} />
       </button>
       <div className={ (!isOpenUserMenu && 'md:hidden') + " md:-ml-28 md:absolute z-50 mt-2 md:my-4 text-base list-none md:bg-slate-50 divide-y divide-gray-200 rounded md:shadow"}>
         <div className="flex items-center px-4 py-3">
           <div className="mr-4 md:hidden">
-            <image className="w-10 h-10 rounded-full" src="https://xsgames.co/randomusers/avatar.php?g=male" alt="user photo" />
+            <img className="w-10 h-10 rounded-full" src="https://xsgames.co/randomusers/avatar.php?g=male" alt={(user?.name) + ' Profile'} />
           </div>
           <div>
             <span className="block text-sm text-gray-900">{ user?.name }</span>
