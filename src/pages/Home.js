@@ -46,12 +46,11 @@ const Home = () => {
           <h1 className="my-4 text-center text-3xl text-teal-500 font-bold">
             Menu
           </h1>
-          { foods.length > 0 ?
-            (<CardProductsSwipeable products={foods} />) :
-            (<div className="flex justify-center">
-              <div className="block float-center h-64 w-8/12 md:w-96 rounded-lg bg-gray-200/80"></div>
-            </div>)
-          }
+          <div className="relative">
+            { foods.length > 0 &&
+              (<CardProductsSwipeable products={foods} />)
+            }
+          </div>
         </div>
         
         <div className="flex w-full justify-center mt-12">
@@ -59,7 +58,7 @@ const Home = () => {
             <h1 className="my-4 text-center text-2xl text-teal-500 font-bold">
               Official Video
             </h1>
-            <iframe className="w-full aspect-video bg-red-400 shadow-md rounded-lg" src="https://www.youtube.com/embed/uXWycyeTeCs" title="YouTube Embed Video"></iframe>
+            <iframe className="w-full aspect-video shadow-md rounded-lg" src="https://www.youtube.com/embed/uXWycyeTeCs" title="YouTube Embed Video"></iframe>
           </div>
         </div>
         
