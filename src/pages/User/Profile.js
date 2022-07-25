@@ -1,5 +1,4 @@
 import AppLayout from './../../layouts/AppLayout'
-import { withAuth } from './../../context/AuthContext'
 
 const Profile = ({ user : { email } }) => {
   return (
@@ -17,4 +16,4 @@ const Profile = ({ user : { email } }) => {
   )
 }
 
-export default withAuth(Profile);
+export default Profile;

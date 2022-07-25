@@ -1,4 +1,4 @@
-import WebRoutes from './routes/WebRoutes'
+import Routes from './routes'
 import { SwitchPageProvider } from './context/SwitchPageContext'
 import { AuthProvider } from './context/AuthContext'
 
@@ -6,7 +6,7 @@ const App = () => {
   return (
     <SwitchPageProvider>
        <AuthProvider>
-          <WebRoutes />
+          <Routes />
         </AuthProvider>
     </SwitchPageProvider>
   )

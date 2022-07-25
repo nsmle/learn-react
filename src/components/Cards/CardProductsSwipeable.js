@@ -20,7 +20,7 @@ const CardProductsSwipeable = ({ products }) => {
         enabled: true,
       }}
       modules={[EffectCards, Mousewheel, Keyboard, Autoplay]}
-      className="h-9/12 w-9/12"
+      className="h-full w-9/12"
     >
       { products.length > 0 && products.map(product => (
           <SwiperSlide key={Math.floor(product.image.length * Math.random())}

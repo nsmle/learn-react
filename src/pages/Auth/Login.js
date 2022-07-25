@@ -7,7 +7,7 @@ import AppLayout from './../../layouts/AppLayout'
 import { ButtonPrimary } from './../../components/Buttons'
 import * as yup from "yup";
 import FormInput from './../../components/Form/FormInput'
-import { withGuest, useAuthContext } from './../../context/AuthContext'
+import { useAuthContext } from './../../context/AuthContext'
 
 const loginSchema = yup.object({
   email: yup.string().email().max(255).required(),
@@ -56,4 +56,4 @@ const Login = () => {
   )
 }
 
-export default withGuest(Login);
+export default Login;

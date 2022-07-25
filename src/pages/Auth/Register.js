@@ -7,7 +7,7 @@ import AppLayout from './../../layouts/AppLayout'
 import { ButtonPrimary } from './../../components/Buttons'
 import * as yup from "yup";
 import FormInput from './../../components/Form/FormInput'
-import { withGuest, useAuthContext } from './../../context/AuthContext'
+import { useAuthContext } from './../../context/AuthContext'
 
 const registerSchema = yup.object({
   name : yup.string().min(1).matches(/^[aA-zZ\s]+$/).required(),
@@ -60,4 +60,4 @@ const Register = () => {
   )
 }
 
-export default withGuest(Register)
+export default Register
