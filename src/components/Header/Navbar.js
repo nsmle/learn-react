@@ -45,7 +45,7 @@ const Navbar = () => {
               <ButtonPrimary>Register</ButtonPrimary>
              </Link>)*/
           }
-          { !AuthContext.isUserEmpty() ?
+          { !(Object.keys(AuthContext.user).length === 0) ?
               (<Navprofile />) :
               (<div>
                   { location.pathname !== '/login' &&

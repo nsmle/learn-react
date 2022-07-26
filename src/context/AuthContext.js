@@ -1,30 +1,102 @@
-import { useState, useEffect, createContext, useContext } from 'react';
+import { 
+  useState,
+  useEffect,
+  createContext,
+  useContext
+} from 'react';
 import { Navigate } from 'react-router-dom'
+import {
+  jwtVerify,
+  SignJWT
+} from 'jose'
 
 const AuthContext = createContext()
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState({})
   
+  // Generate random user for dummy data
+  const generateUser = async (userProperty) => {
+    let user = {}
+    try {
+      const response = await fetch('https://randomuser.me/api/')
+      user = (await response.json()).results[0]
+    } catch (err) {
+      return false
+    }
+    
+    user.name = userProperty.name ?
+      userProperty.name :
+      `${user.name.title}. ${user.name.first} ${user.name.last}`
+    user.email = userProperty.email;
+    user.login = { 
+      password: userProperty.password
+    };
+    
+    return user;
+  }
+  
+  // Generate JWT token
+  const generateToken = async (data) => {
+    console.log(data);
+    const token = await new SignJWT({ data: data })
+      .setProtectedHeader({ alg: 'HS256' })
+      .setIssuedAt((new Date()).getTime())
+      .setIssuer(window.location.href)
+      .setAudience(window.location.origin)
+      .setExpirationTime(process.env.REACT_APP_JWT_EXPIRES)
+      .sign(new TextEncoder().encode(process.env.REACT_APP_JWT_SECRET))
+    
+    return token;
+  }
+  
+  // Verify token and return user data
+  const verifyToken = async (token) => {
+    const {
+      payload,
+      protectedHeader
+    } = await jwtVerify(token, new TextEncoder().encode(process.env.REACT_APP_JWT_SECRET), {
+      audience: window.location.origin,
+    })
+    
+    console.log({ 
+      token: token,
+      payload: payload,
+      protectedHeader: protectedHeader
+    })
+    
+    return payload.data;
+  }
+  
   useEffect(() => {
-    let authLocalStorage = JSON.parse(localStorage.getItem('authenticated-user'))
-    !!authLocalStorage && setUser(authLocalStorage)
+    // Get token from local storage and set user by token payload
+    const authenticate = async () => {
+      let token = localStorage.getItem('token');
+      
+      if (!!token) {
+        let userAuth = await verifyToken(token);
+        !!userAuth ? setUser(userAuth) : userAuth({})
+      }
+    }
+    
+    authenticate()
   }, [])
   
   
+  // Value of AuthContext
   const Auth = {
     user,
-    setUser: (user) => {
-      localStorage.setItem('authenticated-user', JSON.stringify(user))
+    loginRegister: async (user) => {
+      let token = await generateToken(user)
+      
+      localStorage.setItem('token', token)
       setUser(user)
     },
-    isUserEmpty: () => {
-      return (Object.keys(user).length === 0)
-    },
     logout: () => {
-      localStorage.removeItem('authenticated-user')
+      localStorage.removeItem('token')
       setUser({})
-    }
+    },
+    generateUser
   }
   
   return (
@@ -41,7 +113,8 @@ export const useAuthContext = () => {
 
 export const withAuth = (WrappedComponent, role) => ({...props}) => {
   const auth = useContext(AuthContext)
-  if (auth.isUserEmpty()) return <Navigate to="/login" />
+  
+  if (Object.keys(auth?.user).length === 0) return <Navigate to="/login" />
   
   return (
     <>
@@ -52,7 +125,8 @@ export const withAuth = (WrappedComponent, role) => ({...props}) => {
 
 export const withGuest = (WrappedComponent, role) => ({...props}) => {
   const auth = useContext(AuthContext)
-  if (!auth.isUserEmpty()) return <Navigate to="/profile" />
+  
+  if (!(Object.keys(auth?.user).length === 0)) return <Navigate to="/profile" />
   
   return (
     <>

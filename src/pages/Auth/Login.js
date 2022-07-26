@@ -20,9 +20,20 @@ const Login = () => {
     resolver: yupResolver(loginSchema)
   });
   
-  const onSubmit = (user) => {
+  const onSubmit = async (user) => {
+    toast.info('Please wait...');
+    
+    user = await AuthContext.generateUser(user);
+    
+    toast.dismiss()
+    if (!user) {
+      return toast.error('Login failed, Please try again!');
+    }
+    
     toast.success('Login successful.');
-    AuthContext.setUser(user)
+    setTimeout(() => {
+      AuthContext.loginRegister(user);
+    }, 1000);
   };
   
   return (

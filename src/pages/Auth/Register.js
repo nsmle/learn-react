@@ -22,9 +22,21 @@ const Register = () => {
     resolver: yupResolver(registerSchema)
   });
   
-  const onSubmit = (user) => {
+  
+  const onSubmit = async (user) => {
+    toast.info('Please wait...');
+    
+    user = await AuthContext.generateUser(user);
+    
+    toast.dismiss()
+    if (!user) {
+      return toast.error('Register failed, Please try again!');
+    }
+    
     toast.success('Register successful.');
-    AuthContext.setUser(user)
+    setTimeout(() => {
+      AuthContext.loginRegister(user);
+    }, 1000);
   };
   
   return (
