@@ -38,10 +38,10 @@ export const AuthProvider = ({ children }) => {
   
   // Generate JWT token
   const generateToken = async (data) => {
-    console.log(data, process.env);
+    console.log({ process: process, data: data, env: process.env});
     const token = await new SignJWT({ data: data })
       .setProtectedHeader({ alg: 'HS256' })
-      .setIssuedAt(parseInt((new Date().getTime() / 1000).toFixed(0)))
+      .setIssuedAt()
       .setIssuer(window.location.href)
       .setAudience(window.location.origin)
       .setExpirationTime(process.env.REACT_APP_JWT_EXPIRES)
