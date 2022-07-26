@@ -38,7 +38,7 @@ export const AuthProvider = ({ children }) => {
   
   // Generate JWT token
   const generateToken = async (data) => {
-    console.log({ process: process, data: data, env: process.env});
+    console.log({ data: data, env: process.env});
     const token = await new SignJWT({ data: data })
       .setProtectedHeader({ alg: 'HS256' })
       .setIssuedAt()
