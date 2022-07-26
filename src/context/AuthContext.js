@@ -41,7 +41,7 @@ export const AuthProvider = ({ children }) => {
     console.log(data);
     const token = await new SignJWT({ data: data })
       .setProtectedHeader({ alg: 'HS256' })
-      .setIssuedAt(Math.floor(new Date().getTime() / 1000))
+      .setIssuedAt(parseInt((new Date().getTime() / 1000).toFixed(0)))
       .setIssuer(window.location.href)
       .setAudience(window.location.origin)
       .setExpirationTime(process.env.REACT_APP_JWT_EXPIRES)
